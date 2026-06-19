@@ -109,6 +109,14 @@ Cosine similarity is computed as:
 = \mu_i^\top \mu_j
 ```
 
+## Method Summary
+
+A mathematical summary of the Conformer-vMF training and generation formulation is available here:
+
+- [Method summary: Conformer-vMF music representation and generation](docs/method_summary.md)
+
+This document describes the vMF coordinate construction, harmonic center direction, multi-task training losses, optional P²OT prototype lens, and generation-time pitch/velocity/timing equations.
+
 ## Repository Structure
 
 ```text
