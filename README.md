@@ -316,3 +316,29 @@ If you use or refer to this repository, please cite it as:
 This repository is released for research and educational purposes.  
 Please check the license file before reuse.
 
+## Reproducible full-arrangement generation
+
+This repository includes a Conformer-vMF full-arrangement generation pipeline.
+
+The main reproducible script is:
+
+```bash
+python scripts/generate_vmf_full_arrangement_conformer_block.py
+```
+
+The recommended preset is `quota_empirical`, which uses the training target function distribution:
+
+```text
+T     = 0.4615
+D     = 0.1378
+SD    = 0.1928
+OTHER = 0.2079
+```
+
+See:
+
+```text
+REPRODUCE_QUOTA_EMPIRICAL.md
+```
+
+for the full reproduction command.
