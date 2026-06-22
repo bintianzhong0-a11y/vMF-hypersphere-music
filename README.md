@@ -4,12 +4,42 @@ This repository contains experimental artifacts for visualizing musical harmony 
 
 本リポジトリは、音楽に含まれるコード種別・root・5度圏距離・和声中心を、vMF 分布の方向ベクトルとして扱い、学習された超球面上の構造を可視化・分析・演奏生成するための研究成果物です。
 
-## Overview
+Overview
 
-In this project, musical events are represented as directional vectors on a learned vMF hypersphere.  
-The goal is to examine whether the learned direction parameter \(\mu\) reflects musically meaningful relationships such as chord-type similarity, inferred root structure, and circle-of-fifths proximity.
+In this project, musical events are represented as directional vectors on a vMF hypersphere.
+The learned direction parameter $\mu$ is used to analyze and model musically meaningful relationships such as chord-type similarity, inferred root structure, pitch-class organization, and circle-of-fifths proximity.
 
-本研究では、音楽的な状態を vMF 分布の方向パラメータ \(\mu\) として表現し、コード種別・推定 root・5度圏上の近接性が、学習された超球面上でどのように現れるかを分析します。
+The model is trained in a multi-task setting.
+It predicts not only the vMF direction, but also several musical attributes, including root class, chord-like probability, chord template, triad type, seventh type, beat position, bar position, onset-related information, and performance-related parameters.
+
+In addition to these note- and event-level representations, this repository introduces a Conformer-based block-level harmonic function transition module.
+This module estimates higher-level harmonic functions such as Tonic (T), Dominant (D), Subdominant (SD), and OTHER, and uses them as a structural control signal during generation.
+
+During generation, the system applies quota-aware empirical decoding based on the training target distribution.
+This prevents autoregressive generation from collapsing into overly repetitive tonic/dominant patterns while preserving the learned Conformer transition logits.
+
+The final generation pipeline produces full-arrangement MIDI files containing melody, chord comping, bass, arpeggio, and pad tracks.
+The aim of this project is to examine whether vMF hypersphere representations can serve both as an interpretable musical structure space and as a practical control mechanism for symbolic music generation.
+
+⸻
+
+概要
+
+本研究では、音楽的なイベントを vMF 超球面上の方向ベクトルとして表現します。
+学習された方向パラメータ $\mu$ を用いて、コード種別の類似性、推定 root 構造、音高クラスの配置、5度圏上の近接性といった音楽的関係を分析・モデル化します。
+
+本モデルは、単一のラベルだけを学習するのではなく、multi-task 学習として構成されています。
+具体的には、vMF 方向に加えて、root class、chord-like probability、chord template、triad type、seventh type、beat position、bar position、onset 関連情報、velocity・timing・duration などの演奏関連パラメータを同時に扱います。
+
+さらに本リポジトリでは、これらの note-level / event-level 表現に加えて、Conformer による block-level harmonic function transition module を導入しています。
+このモジュールでは、Tonic（T）、Dominant（D）、Subdominant（SD）、OTHER といった大域的な和声機能を推定し、生成時の構造制御信号として利用します。
+
+生成時には、学習時の target function 分布に基づく quota-aware empirical decoding を適用します。
+これにより、Conformer が学習した遷移 logits を主軸に保ちながら、自己回帰生成が T / D に過度に偏ることを抑制します。
+
+最終的な生成パイプラインでは、melody、chord comping、bass、arpeggio、pad の各トラックを含む full-arrangement MIDI を出力します。
+本研究の目的は、vMF 超球面表現が、解釈可能な音楽構造空間として機能するだけでなく、記号音楽生成における実用的な制御表現としても利用できるかを検証することです。
+
 ## Generated Audio / 生成音源
 
 A generated audio sample from the Conformer-vMF prototype is available for listening, together with spectrogram and chromagram visualizations.  
