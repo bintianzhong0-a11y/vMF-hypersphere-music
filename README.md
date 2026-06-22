@@ -149,96 +149,7 @@ The generation stage uses learned harmonic directions and chord-related predicti
 The document includes pitch scoring, sampling, velocity generation, timing residuals, duration control, accompaniment rendering, and v6.1 generation constraints.
 この資料には、音高スコア、サンプリング、velocity 生成、timing residual、duration 制御、伴奏生成、v6.1 の生成制約を掲載しています。
 
-再現方法：Conformer-vMF によるフルアレンジ生成
 
-本リポジトリでは、vMF 超球面音楽表現と Conformer による block-level harmonic function transition model を用いて、フルアレンジ MIDI を生成する再現用パイプラインを公開しています。
-
-本命設定は quota_empirical preset です。
-
-1. リポジトリを clone する
-
-git clone https://github.com/bintianzhong0-a11y/vMF-hypersphere-music.git
-cd vMF-hypersphere-music
-
-2. 依存ライブラリをインストールする
-
-pip install -r requirements.txt
-
-3. 学習済み checkpoint をダウンロードする
-
-GitHub の Release ページから、以下の checkpoint ZIP をダウンロードしてください。
-
-Release v0.1.0
-Conformer-vMF quota empirical checkpoint v0.1.0
-
-ダウンロードした ZIP ファイルを展開します。
-
-vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.zip
-
-展開後の .pt ファイルを、以下の場所に配置してください。
-
-checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt
-
-4. フルアレンジ MIDI を生成する
-
-以下のコマンドを実行します。
-
-python scripts/generate_vmf_full_arrangement_conformer_block.py \
-  --checkpoint checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt \
-  --out_midi results/generated/vmf_full_arrangement_quota_empirical_seed5.mid \
-  --out_json results/generated/vmf_full_arrangement_quota_empirical_seed5_stats.json \
-  --key C \
-  --blocks 16 \
-  --steps_per_block 8 \
-  --tempo 120 \
-  --seed 5
-
-このコマンドにより、以下のトラックを含むフルアレンジ MIDI が生成されます。
-
-1. Melody
-2. Chord comping
-3. Bass
-4. Arpeggio
-5. Pad
-
-5. 複数 seed で生成する
-
-for seed in 1 2 3 4 5
-do
-  python scripts/generate_vmf_full_arrangement_conformer_block.py \
-    --checkpoint checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt \
-    --out_midi results/generated/vmf_full_arrangement_quota_empirical_seed${seed}.mid \
-    --out_json results/generated/vmf_full_arrangement_quota_empirical_seed${seed}_stats.json \
-    --key C \
-    --blocks 16 \
-    --steps_per_block 8 \
-    --tempo 120 \
-    --seed ${seed}
-done
-
-生成時の target function 分布
-
-quota_empirical preset では、学習時の block-level target function 分布を参照します。
-
-T     = 0.4615
-D     = 0.1378
-SD    = 0.1928
-OTHER = 0.2079
-
-16 block の生成では、おおよそ以下の配分を目標にします。
-
-T     : 7〜8 blocks
-D     : 2〜3 blocks
-SD    : 約3 blocks
-OTHER : 2〜3 blocks
-
-この decoding 方針により、Conformer が学習した block-level transition logits を主軸にしながら、自己回帰生成で T / D に偏りすぎることを抑え、学習データに近い harmonic function 分布を保った生成を行います。
-
-詳細
-
-詳細な再現手順は、以下のファイルにも記載しています。
-
-REPRODUCE_QUOTA_EMPIRICAL.md
 
 ## Method Summary
 
@@ -401,6 +312,98 @@ If you use or refer to this repository, please cite it as:
   note = {GitHub repository}
 }
 ```
+
+再現方法：Conformer-vMF によるフルアレンジ生成
+
+本リポジトリでは、vMF 超球面音楽表現と Conformer による block-level harmonic function transition model を用いて、フルアレンジ MIDI を生成する再現用パイプラインを公開しています。
+
+##本命設定は quota_empirical preset です。
+
+1. リポジトリを clone する
+
+git clone https://github.com/bintianzhong0-a11y/vMF-hypersphere-music.git
+cd vMF-hypersphere-music
+
+2. 依存ライブラリをインストールする
+
+pip install -r requirements.txt
+
+3. 学習済み checkpoint をダウンロードする
+
+GitHub の Release ページから、以下の checkpoint ZIP をダウンロードしてください。
+
+Release v0.1.0
+Conformer-vMF quota empirical checkpoint v0.1.0
+
+ダウンロードした ZIP ファイルを展開します。
+
+vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.zip
+
+展開後の .pt ファイルを、以下の場所に配置してください。
+
+checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt
+
+4. フルアレンジ MIDI を生成する
+
+以下のコマンドを実行します。
+
+python scripts/generate_vmf_full_arrangement_conformer_block.py \
+  --checkpoint checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt \
+  --out_midi results/generated/vmf_full_arrangement_quota_empirical_seed5.mid \
+  --out_json results/generated/vmf_full_arrangement_quota_empirical_seed5_stats.json \
+  --key C \
+  --blocks 16 \
+  --steps_per_block 8 \
+  --tempo 120 \
+  --seed 5
+
+このコマンドにより、以下のトラックを含むフルアレンジ MIDI が生成されます。
+
+1. Melody
+2. Chord comping
+3. Bass
+4. Arpeggio
+5. Pad
+
+5. 複数 seed で生成する
+
+for seed in 1 2 3 4 5
+do
+  python scripts/generate_vmf_full_arrangement_conformer_block.py \
+    --checkpoint checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt \
+    --out_midi results/generated/vmf_full_arrangement_quota_empirical_seed${seed}.mid \
+    --out_json results/generated/vmf_full_arrangement_quota_empirical_seed${seed}_stats.json \
+    --key C \
+    --blocks 16 \
+    --steps_per_block 8 \
+    --tempo 120 \
+    --seed ${seed}
+done
+
+生成時の target function 分布
+
+quota_empirical preset では、学習時の block-level target function 分布を参照します。
+
+T     = 0.4615
+D     = 0.1378
+SD    = 0.1928
+OTHER = 0.2079
+
+16 block の生成では、おおよそ以下の配分を目標にします。
+
+T     : 7〜8 blocks
+D     : 2〜3 blocks
+SD    : 約3 blocks
+OTHER : 2〜3 blocks
+
+この decoding 方針により、Conformer が学習した block-level transition logits を主軸にしながら、自己回帰生成で T / D に偏りすぎることを抑え、学習データに近い harmonic function 分布を保った生成を行います。
+
+詳細
+
+詳細な再現手順は、以下のファイルにも記載しています。
+
+REPRODUCE_QUOTA_EMPIRICAL.md
+
 
 ## License
 
