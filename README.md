@@ -336,16 +336,22 @@ pip install -r requirements.txt
 
 GitHub の Release ページから、以下の checkpoint ZIP をダウンロードしてください。
 
+```text
 Release v0.1.0
 Conformer-vMF quota empirical checkpoint v0.1.0
+```
 
 ダウンロードした ZIP ファイルを展開します。
 
+```text
 vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.zip
+```
 
 展開後の .pt ファイルを、以下の場所に配置してください。
 
+```text
 checkpoints/vmf_conformer_block_transition_pop1k7_1000_finetune_from_head_best.pt
+```
 
 4. フルアレンジ MIDI を生成する
 
@@ -392,23 +398,21 @@ done
 
 quota_empirical preset では、学習時の block-level target function 分布を参照します。
 
+```text
 T     = 0.4615
-
 D     = 0.1378
-
 SD    = 0.1928
-
 OTHER = 0.2079
+```
 
 16 block の生成では、おおよそ以下の配分を目標にします。
 
+```text
 T     : 7〜8 blocks
-
 D     : 2〜3 blocks
-
 SD    : 約3 blocks
-
 OTHER : 2〜3 blocks
+```
 
 この decoding 方針により、Conformer が学習した block-level transition logits を主軸にしながら、自己回帰生成で T / D に偏りすぎることを抑え、学習データに近い harmonic function 分布を保った生成を行います。
 
