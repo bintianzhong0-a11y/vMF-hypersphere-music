@@ -393,15 +393,21 @@ done
 quota_empirical preset では、学習時の block-level target function 分布を参照します。
 
 T     = 0.4615
+
 D     = 0.1378
+
 SD    = 0.1928
+
 OTHER = 0.2079
 
 16 block の生成では、おおよそ以下の配分を目標にします。
 
 T     : 7〜8 blocks
+
 D     : 2〜3 blocks
+
 SD    : 約3 blocks
+
 OTHER : 2〜3 blocks
 
 この decoding 方針により、Conformer が学習した block-level transition logits を主軸にしながら、自己回帰生成で T / D に偏りすぎることを抑え、学習データに近い harmonic function 分布を保った生成を行います。
