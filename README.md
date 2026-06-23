@@ -40,19 +40,21 @@ The aim of this project is to examine whether vMF hypersphere representations ca
 
 ## Music Theory Formulation Summary
 
-This repository also includes a PDF summary of the music-theory-based formulations used in this project.
+This repository includes a PDF summary of the music-theory-based formulations used in this project.
 
-The document explains how pitch class, circle-of-fifths coordinates, fifth-distance, chord templates, harmonic functions, vMF direction parameters, and quota-aware decoding are connected to the proposed Conformer-vMF generation pipeline.
+The document explains how pitch class, circle-of-fifths coordinates, fifth-distance, chord templates, harmonic functions, vMF direction parameters, and quota-aware empirical decoding are connected to the Conformer-vMF generation pipeline.
 
-* [Music Theory Formulation Summary PDF](docs/music_theory_formulation_summary_vmf.pdf)  
+- [View PDF](docs/music_theory_formulation_summary_vmf.pdf)
+- [Download PDF](https://github.com/bintianzhong0-a11y/vMF-hypersphere-music/raw/main/docs/music_theory_formulation_summary_vmf.pdf)
 
-日本語説明
+### 日本語説明
 
 本リポジトリには、本研究で用いる音楽理論由来の立式をまとめた PDF も含めています。
 
-この資料では、pitch class、5度圏座標、5度圏距離、コードテンプレート、和声機能、vMF の方向パラメータ、quota-aware decoding が、Conformer-vMF による生成パイプラインとどのように接続されるかを整理しています。
+この資料では、pitch class、5度圏座標、5度圏距離、コードテンプレート、和声機能、vMF の方向パラメータ、quota-aware empirical decoding が、Conformer-vMF による生成パイプラインとどのように接続されるかを整理しています。
 
-* 音楽理論からくる立式まとめ PDF
+- [PDFを表示](docs/music_theory_formulation_summary_vmf.pdf)
+- [PDFをダウンロード](https://github.com/bintianzhong0-a11y/vMF-hypersphere-music/raw/main/docs/music_theory_formulation_summary_vmf.pdf)
 
 ## Generated Audio / 生成音源
 
