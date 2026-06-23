@@ -499,6 +499,55 @@ SD    = 0.1928
 OTHER = 0.2079
 ```
 
+## Model Dimensions and Parameter Counts
+
+In the current implementation, the generation pipeline can be summarized as follows:
+
+MIDI
+→ 10-dimensional vMF input features
+→ Conformer encoder
+→ vMF / multi-task prediction heads
+→ block-level harmonic function transition head
+→ full-arrangement MIDI
+
+The raw MIDI sequence is first converted into a 10-dimensional event representation.
+This representation includes pitch-class coordinates, circle-of-fifths coordinates, pitch-transition information, pitch height, pitch delta, and beat/bar position features.
+
+The Conformer encoder maps this 10-dimensional input into a 128-dimensional hidden representation:
+
+X \in \mathbb{R}^{T \times 10}
+\quad \longrightarrow \quad
+H \in \mathbb{R}^{T \times 128}
+
+The model predicts a 10-dimensional vMF mean direction and a scalar concentration parameter:
+
+\mu_t \in \mathbb{R}^{10},
+\qquad
+\kappa_t \in \mathbb{R}^{1}
+
+In addition to the vMF outputs, the model also predicts musical attributes such as root class, chord template, triad type, seventh type, beat position, bar position, onset, velocity, timing, duration, and harmonic function labels.
+
+For block-level generation, the model pools the Conformer hidden states into block-level representations and predicts the next harmonic function:
+
+H_b \in \mathbb{R}^{128}
+\quad \longrightarrow \quad
+f_b \in \{T, D, SD, OTHER\}
+
+The current Conformer-vMF block transition model has the following dimensions and parameter counts:
+
+Component	Dimension	Parameters
+vMF input feature	10	0
+Conformer hidden dimension	128	—
+Conformer encoder body	128 hidden, 4 layers, 4 heads	1,532,288
+vMF and event-level heads	(\mu:10), (\kappa:1), plus multi-task outputs	225,337
+Function and transition heads	4 classes + 16 transition classes	36,116
+Block transition head	256 → 128 → 4	51,076
+Total model	Conformer-vMF block transition	1,844,817
+
+The final MIDI generation stage uses the predicted harmonic function sequence and decoded chord structure to generate melody, chord comping, bass, arpeggio, and pad tracks.
+This MIDI decoding stage is rule- and score-based in the current implementation, so it does not add additional trainable parameters.
+
+
 See:
 
 ```text
