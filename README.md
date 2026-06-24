@@ -170,6 +170,51 @@ A smaller angular distance means that two chord types are represented as closer 
 This heatmap shows cosine similarities between chord-type centers. Higher values indicate closer directional alignment in the learned hyperspherical space.
 このヒートマップは、コード種別中心間の cos 類似度を示しています。値が大きいほど、学習された超球面空間内で方向が近く、類似した表現になっていることを表します。
 
+### PCA Variable Analysis / PCA変数分析
+
+This section analyzes which original vMF variables explain the chord-center arrangements shown in the sphere and circle visualizations.  
+この節では、球面・円上に表示されたコード中心の配置が、元の vMF 変数のどの要素によって説明されているかを分析します。
+
+- [PCA variable analysis / PCA変数分析](docs/pca_variable_analysis.md)
+- [Chord center visualization analysis / コード中心可視化まとめ](docs/chord_center_visualization_analysis.md)
+
+The PCA input is the 10-dimensional vMF center vector averaged for each chord category.  
+PCA の入力は、コードカテゴリごとに平均化した 10 次元 vMF 中心ベクトルです。
+
+For `template` and `triad`, the first principal component is strongly related to circle-of-fifths components.  
+`template` と `triad` では、第1主成分が 5度圏成分と強く関係しています。
+
+For `seventh`, the first principal component is more strongly related to pitch-transition components, suggesting a connection with progression and resolution context.  
+`seventh` では、第1主成分が音高遷移成分とより強く関係しており、進行・解決文脈との関連が示唆されます。
+
+### Representative figures / 代表図
+
+#### Template chord centers / template コード中心
+
+![Template sphere with music labels](figures/chord_center_visualizations/pop1k7_1000_template_sphere_music_labels.png)
+
+#### Template angular distance / template 角距離
+
+![Template angular distance heatmap](figures/chord_center_visualizations/pop1k7_1000_template_angular_distance_heatmap_music_labels.png)
+
+#### Template PC1 loadings / template PC1 loading
+
+![Template PC1 loadings](figures/pca_variable_analysis/template_PC1_loadings.png)
+
+#### Seventh PC1 loadings / seventh PC1 loading
+
+![Seventh PC1 loadings](figures/pca_variable_analysis/seventh_PC1_loadings.png)
+
+### Interpretation note / 解釈上の注意
+
+These visualizations should not be interpreted as proof that the model discovered music theory entirely from scratch.  
+これらの可視化は、モデルが音楽理論を完全にゼロから発見したことを示すものではありません。
+
+Rather, they show that the designed vMF representation preserves and organizes chord-related information in a geometrically interpretable way.  
+むしろ、設計した vMF 表現が、コード関連情報を幾何的に解釈しやすい形で保持・整理していることを示すものです。
+loading README_pca_results_snippet.md…]()
+
+
 ### Inferred root angular distance / 推定 root 間の角距離
 
 ![vMF angular distance between inferred root centers](figures/vMF_root_inf_dist.png)
