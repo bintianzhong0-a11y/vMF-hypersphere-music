@@ -129,12 +129,8 @@ The processed dataset contains 1000 distinct MIDI files and approximately 1.43 m
 処理済みデータセットは、1000個の異なる MIDI ファイルと約143万イベントから構成されています。
 
 After head training and fine-tuning, the validation performance reached
-```text
-val_acc = 0.832
-val_macro_f1 = 0.808
-```
 
-head 学習と fine-tuning の後、検証性能は 
+head 学習と fine-tuning の後、検証性能は
 ```text
 val_acc = 0.832
 val_macro_f1 = 0.808
