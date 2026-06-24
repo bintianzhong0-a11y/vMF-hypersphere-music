@@ -1,0 +1,4 @@
+PC,explained_variance_ratio,top_variables
+PC1,0.4860942896315361,"+fifth_x(0.72), -transition_y(-0.41), +bar_x(0.36), -transition_x(-0.27), -pitch_y(-0.21)"
+PC2,0.2839430632665618,"+transition_y(0.71), -register(-0.43), +bar_x(0.42), -pitch_delta(-0.21), +bar_y(0.15)"
+PC3,0.13046932618125318,"+fifth_y(0.79), +transition_x(0.51), +fifth_x(0.27), -pitch_delta(-0.16), -bar_y(-0.11)"
