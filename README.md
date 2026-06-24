@@ -74,27 +74,6 @@ The main distinction is that pitch, circle-of-fifths structure, metrical positio
 
 - [Differentiation from other music generation systems / 他の生成システムとの差別化](docs/generation_system_differentiation.md)
 
-## Block Transition Experiment / 和声機能遷移実験
-
-This experiment evaluates whether Conformer-vMF can predict block-level harmonic function transitions from Pop1K7-derived MIDI data.  
-この実験では、Pop1K7 由来の MIDI データから、Conformer-vMF が block 単位の和声機能遷移を予測できるかを検証しています。
-
-The processed dataset contains 1000 distinct MIDI files and approximately 1.43 million note events.  
-処理済みデータセットは、1000個の異なる MIDI ファイルと約143万イベントから構成されています。
-
-After head training and fine-tuning, the validation performance reached
-```text
-val_acc = 0.832
-val_macro_f1 = 0.808
-```
-
-head 学習と fine-tuning の後、検証性能は 
-```text
-val_acc = 0.832
-val_macro_f1 = 0.808
-```
-に到達しました。
-
 - [Pop1K7 1000 Conformer-vMF block transition experiment](docs/pop1k7_block_transition_experiment.md)
 ading README_git_summary_combined_snippet.md…]()
 
@@ -129,7 +108,7 @@ Inferred root centers show a strong correspondence with circle-of-fifths distanc
 
 The circle-of-fifths distance and vMF angular distance showed a high correlation.
 
-5度圏距離と vMF 空間上の角距離は、高い相関を示した。
+### 5度圏距離と vMF 空間上の角距離は、高い相関
 
 * Pearson correlation = `0.954`
   Pearson 相関係数 = `0.954`
@@ -140,6 +119,28 @@ The circle-of-fifths distance and vMF angular distance showed a high correlation
 These results suggest that the learned vMF `μ`-space may partially encode music-theoretical proximity.
 
 これらの結果は、学習された vMF `μ` 空間が、音楽理論上の近接性を部分的に符号化している可能性を示している。
+
+### Block Transition Experiment / 和声機能遷移実験
+
+This experiment evaluates whether Conformer-vMF can predict block-level harmonic function transitions from Pop1K7-derived MIDI data.  
+この実験では、Pop1K7 由来の MIDI データから、Conformer-vMF が block 単位の和声機能遷移を予測できるかを検証しています。
+
+The processed dataset contains 1000 distinct MIDI files and approximately 1.43 million note events.  
+処理済みデータセットは、1000個の異なる MIDI ファイルと約143万イベントから構成されています。
+
+After head training and fine-tuning, the validation performance reached
+```text
+val_acc = 0.832
+val_macro_f1 = 0.808
+```
+
+head 学習と fine-tuning の後、検証性能は 
+```text
+val_acc = 0.832
+val_macro_f1 = 0.808
+```
+に到達しました。
+
 
 ## Main Visualizations / 主な可視化結果
 
