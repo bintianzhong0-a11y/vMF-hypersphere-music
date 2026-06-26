@@ -59,10 +59,15 @@ $$
 
 特に、5度圏上で近い音や和声は、vMF空間上でも近い方向として扱えるため、単なる離散的なコードラベルではなく、角度に基づく連続的な和声近接性を生成に反映できる。  
 その結果、現在の和声・音高・拍節文脈に対して自然で親和性の高い響きを生成できる可能性がある。
+
 <details>
+<summary><strong>Generation score</strong></summary>
+
+生成時には、候補音 \(p\) を vMF 超球面上の方向ベクトル \(e_p\) に変換し、現在の平均方向 \(\mu_t\) との角度一致度を用いて評価する。
+
 $$
-\[
-\mathrm{score}_t(p) =
+\mathrm{score}_t(p)
+=
 w_{\mathrm{vMF}} e_p^{\top}\mu_t
 +
 w_{\mathrm{chord}}
@@ -81,10 +86,29 @@ w_{\mathrm{range}}
 \mathbf{1}
 \left[
 p_{\min} \leq p \leq p_{\max}
-\right]-
+\right]
+-
 P_t(p)
-\]
 $$
+
+ペナルティ項は次のように定義する。
+
+$$
+P_t(p)
+=
+\alpha_{\mathrm{rep}}
+\mathbf{1}[p=p_{t-1}]
++
+\alpha_{\mathrm{leap}}
+\mathbf{1}[|p-p_{t-1}| \geq L]
++
+\alpha_{\mathrm{same}}
+\mathbf{1}[\mathrm{SameDir}_t(p)]
++
+\alpha_{\mathrm{start}}
+\mathbf{1}[\mathrm{Start}_t,\ t>0]
+$$
+
 </details>
 
 最終的な生成パイプラインでは、melody、chord comping、bass、arpeggio、pad の各トラックを含む full-arrangement MIDI を出力します。
