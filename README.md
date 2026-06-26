@@ -63,8 +63,7 @@ $$
 
 $$
 \[
-\mathrm{score}_t(p)
-=
+\mathrm{score}_t(p) =
 w_{\mathrm{vMF}} e_p^{\top}\mu_t
 +
 w_{\mathrm{chord}}
