@@ -60,7 +60,6 @@ $$
 特に、5度圏上で近い音や和声は、vMF空間上でも近い方向として扱えるため、単なる離散的なコードラベルではなく、角度に基づく連続的な和声近接性を生成に反映できる。  
 その結果、現在の和声・音高・拍節文脈に対して自然で親和性の高い響きを生成できる可能性がある。
 <details>
-
 $$
 \[
 \mathrm{score}_t(p) =
@@ -86,7 +85,6 @@ p_{\min} \leq p \leq p_{\max}
 P_t(p)
 \]
 $$
-
 </details>
 
 最終的な生成パイプラインでは、melody、chord comping、bass、arpeggio、pad の各トラックを含む full-arrangement MIDI を出力します。
