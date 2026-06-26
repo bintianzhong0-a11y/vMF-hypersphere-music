@@ -63,9 +63,9 @@ $$
 <details>
 <summary><strong>Generation score</strong></summary>
 
-生成時には、候補音 \(p\) を vMF 超球面上の方向ベクトル \(e_p\) に変換し、現在の平均方向 \(\mu_t\) との角度一致度を用いて評価する。
+生成時には、候補音 $p$ を vMF 超球面上の方向ベクトル $e_p$ に変換し、現在の平均方向 $\mu_t$ との角度一致度を用いて評価する。
 
-$$
+```math
 \mathrm{score}_t(p)
 =
 w_{\mathrm{vMF}} e_p^{\top}\mu_t
@@ -89,11 +89,11 @@ p_{\min} \leq p \leq p_{\max}
 \right]
 -
 P_t(p)
-$$
+```
 
 ペナルティ項は次のように定義する。
 
-$$
+```math
 P_t(p)
 =
 \alpha_{\mathrm{rep}}
@@ -107,7 +107,9 @@ P_t(p)
 +
 \alpha_{\mathrm{start}}
 \mathbf{1}[\mathrm{Start}_t,\ t>0]
-$$
+```
+
+ここで、$e_p^{\top}\mu_t$ は候補音方向と現在の vMF 平均方向の角度一致度を表す。
 
 </details>
 
